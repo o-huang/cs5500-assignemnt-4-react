@@ -5,7 +5,7 @@ const USERS_API = `${BASE_URL}/api/users`;
 const TUITS_API = `${BASE_URL}/api/tuits`;
 
 const api = axios.create({
-  withCredentials: true
+    withCredentials: true
 });
 
 export const findAllTuitsLikedByUser = (userId) =>
@@ -18,4 +18,8 @@ export const findAllUsersThatLikedTuit = (tid) =>
 
 export const userLikesTuit = (uid, tid) =>
     api.put(`${USERS_API}/${uid}/likes/${tid}`)
+        .then(response => response.data);
+
+export const checkIfUserLikedTuit = (uid, tid) =>
+    api.get(`${USERS_API}/${uid}/likes/${tid}`)
         .then(response => response.data);
