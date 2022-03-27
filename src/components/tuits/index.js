@@ -19,8 +19,8 @@ const Tuits = ({ tuits = [], refreshTuits }) => {
     service.deleteTuit(tid)
       .then(refreshTuits);
 
-  const checkIfTuitWasLiked = (tuit) =>
-    likesService.checkIfUserLikedTuit("me", tuit._id).catch(e => alert(e))
+
+ 
 
   return (
     <div>
@@ -31,7 +31,6 @@ const Tuits = ({ tuits = [], refreshTuits }) => {
               deleteTuit={deleteTuit}
               likeTuit={likeTuit}
               dislikeTuit={dislikeTuit}
-              checkIfTuitWasLiked={checkIfTuitWasLiked}
               tuit={tuit} />)
         }
       </ul>

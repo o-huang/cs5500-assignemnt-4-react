@@ -1,9 +1,31 @@
 import React from "react";
-import { checkIfUserLikedTuit } from "../../services/likes-service";
-
+import * as likesService from "../../services/likes-service";
+import * as dislikesService from "../../services/dislike-service";
+import { useEffect, useState } from "react";
 
 const TuitStats = ({ tuit, likeTuit = () => { }, dislikeTuit = () => { } }) => {
 
+
+  const [tuitLikedStatus, setTuitLikedStatus] = useState({ status: "nothing" });
+
+  const checkLiked = () =>
+    likesService.checkIfUserLikedTuit("me", tuit._id)
+      .then(tuitLikedStatus => setTuitLikedStatus(tuitLikedStatus));
+
+  useEffect(checkLiked, { status: "nothing" });
+
+
+  const [tuitDislikedStatus, setTuitDislikedStatus] = useState({ status: "nothing" });
+
+  const checkDisliked = () =>
+    dislikesService.checkIfUserDislikedTuit("me", tuit._id)
+      .then(tuitDislikedStatus => setTuitDislikedStatus(tuitDislikedStatus));
+
+  useEffect(checkDisliked, { status: "nothing" });
+
+
+
+  console.log(tuitLikedStatus["status"])
   return (
     <div className="row mt-2">
       <div className="col">
@@ -19,12 +41,12 @@ const TuitStats = ({ tuit, likeTuit = () => { }, dislikeTuit = () => { } }) => {
 
           {
 
-            tuit.stats.likes > 0 &&
+            tuitLikedStatus["status"] == "liked" &&
             <i className="fa-solid fa-thumbs-up" style={{ color: 'red' }}></i>
 
           }
           {
-            tuit.stats.likes <= 0 &&
+            tuitLikedStatus["status"] == "nothing" &&
             <i className="fa-solid fa-thumbs-up"></i>
           }
 
@@ -35,12 +57,12 @@ const TuitStats = ({ tuit, likeTuit = () => { }, dislikeTuit = () => { } }) => {
 
           {
 
-            tuit.stats.likes > 0 &&
+            tuitDislikedStatus["status"] == "disliked" &&
             <i className="fa-solid fa-thumbs-down" style={{ color: 'red' }}></i>
 
           }
           {
-            tuit.stats.likes <= 0 &&
+            tuitDislikedStatus["status"] == "nothing" &&
             <i className="fa-solid fa-thumbs-down"></i>
           }
 
