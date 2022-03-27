@@ -23,9 +23,6 @@ const TuitStats = ({ tuit, likeTuit = () => { }, dislikeTuit = () => { } }) => {
 
   useEffect(checkDisliked, { status: "nothing" });
 
-
-
-  console.log(tuitLikedStatus["status"])
   return (
     <div className="row mt-2">
       <div className="col">
@@ -37,12 +34,12 @@ const TuitStats = ({ tuit, likeTuit = () => { }, dislikeTuit = () => { } }) => {
         {tuit.stats && tuit.stats.retuits}
       </div>
       <div className="col">
-        <span onClick={() => likeTuit(tuit)}>
+        <span onClick={(event) => { likeTuit(tuit) }}>
 
           {
 
             tuitLikedStatus["status"] == "liked" &&
-            <i className="fa-solid fa-thumbs-up" style={{ color: 'red' }}></i>
+            <i className="fa-solid fa-thumbs-up" style={{ color: "red" }}></i>
 
           }
           {
@@ -53,12 +50,12 @@ const TuitStats = ({ tuit, likeTuit = () => { }, dislikeTuit = () => { } }) => {
         </span>
         {tuit.stats && tuit.stats.likes}
 
-        <span onClick={() => dislikeTuit(tuit)}>
+        <span onClick={(event) => { dislikeTuit(tuit);}}>
 
           {
 
             tuitDislikedStatus["status"] == "disliked" &&
-            <i className="fa-solid fa-thumbs-down" style={{ color: 'red' }}></i>
+            <i className="fa-solid fa-thumbs-down" style={{ color: "red" }}></i>
 
           }
           {
