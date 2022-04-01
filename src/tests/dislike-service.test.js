@@ -5,7 +5,7 @@ import {
     findAllTuitsDislikedByUser, findAllUsersThatDisikedTuit,
     userDislikesTuit, checkIfUserDislikedTuit
 } from "../services/dislike-service"
-import {createUser, deleteUsersByUsername, findAllUsers, findUserById} from "../services/users-service";
+import { createUser, deleteUsersByUsername, findAllUsers, findUserById } from "../services/users-service";
 import {
     findAllTuits, findTuitById, findTuitByUser, createTuit, updateTuit, deleteTuit, deleteTuitsByTuit
 } from "../services/tuits-service";
@@ -43,22 +43,22 @@ describe('userDislikesTuit', () => {
 
         // create a new tuit
         const newTuit = await createTuit(newUser._id, theTuit)
-        
+
         // make user dislike tuit and check status to ok making sure it fulfilled
         const newDislike = await userDislikesTuit(newUser._id, newTuit._id)
         expect(newDislike).toEqual("OK")
-        
+
         // we now check if user actually disliked tuit
         const checkIfDisliked = await checkIfUserDislikedTuit(newUser._id, newTuit._id)
-        expect(checkIfDisliked).toEqual({status: 'disliked'})
-        
+        expect(checkIfDisliked).toEqual({ status: 'disliked' })
+
         // User now undislikes the tuit(aka remove dislike)
         const newDislike2 = await userDislikesTuit(newUser._id, newTuit._id)
         expect(newDislike2).toEqual("OK")
-        
+
         // Check that user dislike the tuit and return proper result.
         const checkIfDislikedRemoved = await checkIfUserDislikedTuit(newUser._id, newTuit._id)
-        expect(checkIfDislikedRemoved).toEqual({status: 'nothing'})
+        expect(checkIfDislikedRemoved).toEqual({ status: 'nothing' })
     });
 });
 
