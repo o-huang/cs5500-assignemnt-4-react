@@ -1,5 +1,5 @@
 import { act, create } from 'react-test-renderer';
-import TuitStats from "./tuit-stats";
+import TuitStats from "../components/tuits/tuit-stats";
 
 test('stats render correctly', () => {
     let stats = {
@@ -32,8 +32,7 @@ test('stats render correctly', () => {
     const likesCounter = root.findByProps({ className: 'ttr-stats-likes' })
     const retuitsCounter = root.findByProps({ className: 'ttr-stats-retuits' })
     const repliesCounter = root.findByProps({ className: 'ttr-stats-replies' })
-    const likeTuitButton = root.findByProps(
-        { className: 'ttr-like-tuit-click' })
+    const likeTuitButton = root.findByProps({ className: 'ttr-like-tuit-click' })
 
     let likesText = likesCounter.children[0];
     const repliesText = repliesCounter.children[0];
