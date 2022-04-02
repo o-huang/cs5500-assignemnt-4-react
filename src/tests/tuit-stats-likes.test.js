@@ -1,7 +1,11 @@
 import { act, create } from 'react-test-renderer';
 import TuitStats from "../components/tuits/tuit-stats";
+import {deleteUsersByUsername} from "../services/users-service";
+import {createTuit, deleteTuitsByTuit} from "../services/tuits-service";
+import {register} from "../services/security-service";
+import {findAllTuitsDislikedByUser, userDislikesTuit} from "../services/dislike-service";
 
-test('stats render correctly', () => {
+test('stats render correctly for like', () => {
     let stats = {
         likes: 123,
         replies: 234,
@@ -41,7 +45,10 @@ test('stats render correctly', () => {
     expect(repliesText).toBe('234');
     expect(retuitsText).toBe('345');
 
+
+    //Liking tuit and seeing the counter
     act(() => { likeTuitButton.props.onClick() })
     likesText = likesCounter.children[0];
     expect(likesText).toBe('124');
 });
+

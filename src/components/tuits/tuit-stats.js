@@ -58,7 +58,7 @@ const TuitStats = ({ tuit, likeTuit = () => { }, dislikeTuit = () => { } }) => {
 
                 <span className="ttr-stats-likes">{tuit.stats && tuit.stats.likes}</span>
 
-                <span className="ttr-like-tuit-click" onClick={(event) => {
+                <span className="ttr-dislike-tuit-click" onClick={(event) => {
                     dislikeTuit(tuit);
                     setTimeout(() => { window.location.reload(); }, 500);
                 }}>
